@@ -27,6 +27,9 @@
     <script src="{{ asset('js/fakeLoader.min.js') }}"></script>
     <link href="{{ asset('css/fakeLoader.min.css') }}" rel="stylesheet" />
     @stack('css')
+    @if(config('techbros.recaptcha'))
+    {!! htmlScriptTagJsApi() !!}
+    @endif
 </head>
 
 <body class="{{ $class ?? '' }}">
@@ -140,6 +143,9 @@
             float: right;
             text-align: right;
             visibility: hidden;
+        }
+        .grecaptcha-badge {
+          visibility: hidden;
         }
     </style>
     @stack('js')

@@ -36,6 +36,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\CheckBasicInfo::class,
             \App\Http\Middleware\CheckActive::class,
         ],
 
@@ -66,6 +67,7 @@ class Kernel extends HttpKernel
         '2fa' => \App\Http\Middleware\TwoFactorAuthenticate::class,
         'CheckActive' => \App\Http\Middleware\CheckActive::class,
         'CheckAdmin' => \App\Http\Middleware\CheckAdmin::class,
+        'CheckBasicInfo' => \App\Http\Middleware\CheckBasicInfo::class,
 
     ];
 }

@@ -65,4 +65,10 @@ class User extends Authenticatable
             return null;
     }
 
+    public function identities() {
+        return $this->hasMany('App\SocialIdentity');
+    }
+    public function isConnected($service) {
+        return $this->identities()->whereProviderName($service)->first();
+    }
 }

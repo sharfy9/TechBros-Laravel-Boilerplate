@@ -1,6 +1,8 @@
 <?php
 namespace App\Traits;
-// use App\Traits\Encryptable;
+
+use \Crypt;
+
 trait Encryptable
 {
     public function getAttribute($key)

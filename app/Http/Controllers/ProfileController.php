@@ -39,7 +39,6 @@ class ProfileController extends Controller
         ]);
 
         $user->update($request->all());
-
         return back()->with(["successMsg" => __('Profile successfully updated.')]);
     }
 

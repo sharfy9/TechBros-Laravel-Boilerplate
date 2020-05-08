@@ -134,10 +134,43 @@
                         <p class="description">
                             Balance: <span class="text-primary"><b>{{ auth()->user()->balance }}Tk</b></span>
                         </p>
-                        @can('activity.view.own')
-                        <a href="/activity" class="btn btn-sm btn-block btn-primary">Activity Log</a>
-                        @endcan
+                        @if (config('techbros.socialite.active'))
+                        <table class="table table-compact">
+                            <thead>
+                                <tr>
+                                    <th colspan="3">Social Accounts</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (config('techbros.socialite.services') as $item => $color)
+
+                                <tr>
+                                    <td><i class="fab fa-{{$item}}"></i></td>
+                                    <td>
+                                        @if (auth()->user()->isConnected($item))
+                                        <span class="text-success">
+                                            {{auth()->user()->identities()->whereProviderName($item)->first()->email}}
+                                        </span>
+                                        @else
+                                        <span class="text-danger">Not Connected</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if (auth()->user()->isConnected($item))
+                                        <a href="/profile/disconnect/{{$item}}" class="btn btn-sm btn-danger p-1"><i class="fas fa-unlink"></i></a>
+                                        @else
+                                        <a href="/redirect/{{$item}}" class="btn btn-sm btn-success p-1"><i class="fas fa-link"></i></a>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        @endif
                     </div>
+                    @can('activity.view.own')
+                        <a href="/activity" class="btn btn-sm btn-block btn-primary">Activity Log</a>
+                    @endcan
                 </div>
                 <hr>
                 <div class="card-footer">

@@ -47,4 +47,15 @@ class LoginController extends Controller
         }
         return $request->only($this->username(), 'password');
     }
+
+    //Overriding this for recaptcha validation
+    protected function validateLogin(Request $request)
+    {
+        $request->validate([
+            $this->username() => 'required|string',
+            'password' => 'required|string',
+            recaptchaFieldName() => config("techbros.recaptcha") ? recaptchaRuleName() : 'nullable'
+        ]);
+    }
+
 }

@@ -9,15 +9,10 @@
   <div class="content">
     <div class="container">
       <div class="col-md-4 ml-auto mr-auto">
-        <form role="form" method="POST" action="{{ route('password.update') }}">
+        <form role="form" method="POST" id="{{ getFormId() }}" action="{{ route('password.update') }}">
           @csrf
           <input type="hidden" name="token" value="{{ $token }}">
           <div class="card card-login card-plain">
-            <div class="card-header ">
-              <div class="logo-container">
-                <img src="{{ asset('assets/img/now-logo.png') }}" alt="">
-              </div>
-            </div>
             <div class="card-body ">
               <div class="card-body">
                 @if (session('status'))
@@ -65,9 +60,10 @@
                   <strong>{{ $errors->first('password') }}</strong>
                 </span>
               @endif
-            </div>
-            <div class="card-footer ">
-              <button  type = "submit" class="btn btn-primary btn-round btn-lg btn-block mb-3">{{ __('Reset Password') }}</button>
+              {!! htmlFormButton(__('Reset Password'), [
+                "type"=>"submit",
+                "class"=>"btn btn-primary btn-round btn-lg btn-block mb-3"
+              ]) !!}
             </div>
           </div>
         </form>

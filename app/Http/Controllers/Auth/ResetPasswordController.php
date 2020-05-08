@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
@@ -27,4 +28,16 @@ class ResetPasswordController extends Controller
      * @var string
      */
     protected $redirectTo = "/dashboard";
+
+    //overriding this for recaptcha
+    protected function rules()
+    {
+        return [
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed|min:8',
+            recaptchaFieldName() => config("techbros.recaptcha") ? recaptchaRuleName() : 'nullable'
+        ];
+    }
+
 }

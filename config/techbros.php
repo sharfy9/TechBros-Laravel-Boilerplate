@@ -26,6 +26,21 @@ return [
     ],
     'docs' => [
         'name' => 'Documentation',
-        'url' => 'https://wiki.techbros.app/'.config('app.name'),
+        'url' => 'https://wiki.techbros.app/index.php?title='.config('app.name'),
+    ],
+    'recaptcha' => env('RECAPTCHA_ENABLED', false),
+    'sms' => [
+        'domain' => env('SMS_DOMAIN', false),
+        'userid' => env('SMS_USER', false),
+        'password' => env('SMS_PASSWORD', false),
+        'sender' => env('SMS_SENDER', false),
+    ],
+
+    'socialite' => [
+        'active' => env("SOCIALITE_ACTIVE", false),
+        'services' => [
+            'facebook' => '',
+            'google' => '#dd4b39',
+        ],
     ],
 ];
